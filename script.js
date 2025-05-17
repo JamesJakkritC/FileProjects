@@ -1,5 +1,8 @@
 async function checkIn() {
   const name = document.getElementById('name').value;
+  const DEFAULT_LAT = 13.736717; // Example: Bangkok
+  const DEFAULT_LNG = 100.523186;
+  const RANGE_METERS = 100;
   if (!name) {
     alert('Please enter your name');
     return;
