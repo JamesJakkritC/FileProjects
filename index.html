@@ -11,7 +11,7 @@
   <script>
     function submitCheckIn() {
       const name = document.getElementById("nameInput").value;
-      fetch("https://script.google.com/macros/s/AKfycbymUou-FacKNTf_RRjZltb0LLjmSLm7ggNhfP4Q3_G4uFkZl9LUN6eW4QJugHalpCBQ/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbwpUZBIMUay6kzdERlRMSAkseVw3HLpAr3RDKNZNxgmWu-yN8L4cSIeOsfWNrYZtnP4/exec", {
         method: "POST",
         body: JSON.stringify({ name: name }),
         headers: { "Content-Type": "application/json" }
