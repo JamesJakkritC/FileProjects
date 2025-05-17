@@ -1,7 +1,7 @@
 async function checkIn() {
   const name = document.getElementById('name').value;
   if (!name) {
-    alert('Please enter your name');
+    alert('Please enter your names');
     return;
   }
 
