@@ -1,23 +1,16 @@
 async function checkIn() {
   const name = document.getElementById('name').value;
   if (!name) {
-    alert('Please enter your name ?');
+    alert('Please enter your name');
     return;
   }
 
   try {
-    const response = await fetch('/api/checkin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name }),
-    });
-
-    const result = await response.text();
-    document.getElementById('response').innerText = result;
-  } catch (error) {
-    console.error(error);
-    document.getElementById('response').innerText = 'Check-in failed.';
+    const response = await fetch('https://script.google.com/macros/s/AKfycbylKWau7EvWxcaX5Ygnuzs5C0SeJudv5iowmIxSlXrn-I6xxCaVRsR3uUCY8_4s-bTG/exec?name=' + encodeURIComponent(name));
+    const text = await response.text();
+    document.getElementById('response').innerText = text;
+  } catch (err) {
+    console.error(err);
+    document.getElementById('response').innerText = 'Failed to check in.';
   }
 }
