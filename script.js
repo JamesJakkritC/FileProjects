@@ -4,7 +4,11 @@ const RANGE_METERS = 100;
 
 window.onload = function () {
   if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(success, error, {
+  enableHighAccuracy: true,
+  timeout: 10000,
+  maximumAge: 0
+});
   } else {
     document.getElementById('gps-status').innerText = "Geolocation not supported.";
   }
