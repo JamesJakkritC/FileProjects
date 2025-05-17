@@ -1,5 +1,5 @@
-const DEFAULT_LAT = 13.736717; // Change to your real location
-const DEFAULT_LNG = 100.523186;
+const DEFAULT_LAT = 18.581377; // Change to your real location
+const DEFAULT_LNG = 99.047393;
 const RANGE_METERS = 100;
 
 window.onload = function () {
