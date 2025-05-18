@@ -59,6 +59,12 @@ function deg2rad(deg) {
 
 async function checkIn() {
   const name = document.getElementById('name').value;
+  const name = document.getElementById('name').value;
+  if (!name) {
+    alert('Please enter your name !!!');
+    return;
+  }
+  
   const url = `https://script.google.com/macros/s/AKfycbz-EwLwSGioDEOJUIfu3uLR6l9I4BSyGfgIJ2oEfkBci7xla4pTDKIuO8LvK-7zDflw/exec?name=${encodeURIComponent(name)}&action=checkin`;
 
   try {
