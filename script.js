@@ -56,17 +56,34 @@ function deg2rad(deg) {
 
 async function checkIn() {
   const name = document.getElementById('name').value;
-  if (!name) {
-    alert('Please enter your name');
-    return;
-  }
+  if (!name) return alert("Please enter your name");
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbylKWau7EvWxcaX5Ygnuzs5C0SeJudv5iowmIxSlXrn-I6xxCaVRsR3uUCY8_4s-bTG/exec?name=' + encodeURIComponent(name));
-    const text = await response.text();
-    document.getElementById('response').innerText = text;
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzW6ZAdpmwixg6-CnTf0qQzfVoGWWOY9caq4CVtzkG_tAIveLhbWYxswJVCU-LAis8E/exec', {
+      method: 'POST',
+      body: JSON.stringify({ name, action: "checkin" })
+    });
+    const result = await response.text();
+    document.getElementById("response").innerText = result;
   } catch (err) {
     console.error(err);
-    document.getElementById('response').innerText = 'Failed to check in.';
+    document.getElementById("response").innerText = "Check-in failed.";
+  }
+}
+
+async function checkOut() {
+  const name = document.getElementById('name').value;
+  if (!name) return alert("Please enter your name");
+
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzW6ZAdpmwixg6-CnTf0qQzfVoGWWOY9caq4CVtzkG_tAIveLhbWYxswJVCU-LAis8E/exec', {
+      method: 'POST',
+      body: JSON.stringify({ name, action: "checkout" })
+    });
+    const result = await response.text();
+    document.getElementById("response").innerText = result;
+  } catch (err) {
+    console.error(err);
+    document.getElementById("response").innerText = "Check-out failed.";
   }
 }
