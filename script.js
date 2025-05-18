@@ -1,11 +1,8 @@
-//const DEFAULT_LAT = 18.58128; // Iphone Me 
-//const DEFAULT_LNG = 99.04747;
-//const DEFAULT_LAT = 18.7816; // Computer ME
-//const DEFAULT_LNG = 99.0064;
-
 const ALLOWED_LOCATIONS = [
-  { lat: 18.7816, lng: 99.0064, name: "Nong Hoi" },  // Location 1
-  { lat: 18.58128, lng: 99.04747, name: "One Nimman" },  // Location 2
+  //{ lat: 18.7816, lng: 99.0064, name: "Nong Hoi" },  // Me1
+  //{ lat: 18.58128, lng: 99.04747, name: "One Nimman" },  // Me2
+  { lat: 18.751662, lng: 99.012689, name: "Nong Hoi" },  // Location 1
+  { lat: 18.800008, lng: 98.969783, name: "One Nimman" },  // Location 2
   //{ lat: 18.7700, lng: 99.0100 }   // Location 3
 ];
 
