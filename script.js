@@ -59,7 +59,6 @@ function deg2rad(deg) {
 
 async function checkIn() {
   const name = document.getElementById('name').value;
-  const name = document.getElementById('name').value;
   if (!name) {
     alert('Please enter your name !!!');
     return;
