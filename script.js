@@ -1,7 +1,14 @@
-//const DEFAULT_LAT = 18.58128; // Change to your real location
+//const DEFAULT_LAT = 18.58128; // Iphone Me 
 //const DEFAULT_LNG = 99.04747;
-const DEFAULT_LAT = 18.7816; // Change to your real location
-const DEFAULT_LNG = 99.0064;
+//const DEFAULT_LAT = 18.7816; // Computer ME
+//const DEFAULT_LNG = 99.0064;
+
+const ALLOWED_LOCATIONS = [
+  { lat: 18.7816, lng: 99.0064 },  // Location 1
+  { lat: 18.58128, lng: 99.04747 },  // Location 2
+  //{ lat: 18.7700, lng: 99.0100 }   // Location 3
+];
+
 const RANGE_METERS = 100;
 
 window.onload = function () {
@@ -20,31 +27,45 @@ function success(position) {
   const userLat = position.coords.latitude;
   const userLng = position.coords.longitude;
 
-  const distance = getDistanceFromLatLonInMeters(DEFAULT_LAT, DEFAULT_LNG, userLat, userLng);
+  let withinRange = false;
+  let nearestDistance = Infinity;
 
-  if (distance <= RANGE_METERS) {
+  for (const loc of ALLOWED_LOCATIONS) {
+    const distance = getDistanceFromLatLonInMeters(loc.lat, loc.lng, userLat, userLng);
+    if (distance < nearestDistance) nearestDistance = distance;
+
+    if (distance <= RANGE_METERS) {
+      withinRange = true;
+      break;
+    }
+  }
+
+  if (withinRange) {
     document.getElementById('checkin-btn').disabled = false;
     document.getElementById('checkout-btn').disabled = false;
-    document.getElementById('gps-status').innerText = `You are within ${Math.round(distance)} meters. You can check in.`;
+    document.getElementById('gps-status').innerText =
+      `✅ You are within ${Math.round(nearestDistance)} meters of an allowed location.`;
   } else {
-    document.getElementById('gps-status').innerText = `Too far from location (${Math.round(distance)}m). You cannot check in.`;
+    document.getElementById('checkin-btn').disabled = true;
+    document.getElementById('checkout-btn').disabled = true;
+    document.getElementById('gps-status').innerText =
+      `🚫 Too far from any allowed location (${Math.round(nearestDistance)}m).`;
   }
 }
 
 function error(err) {
   console.error(err);
-  document.getElementById('gps-status').innerText = "Failed to get GPS location.";
+  document.getElementById('gps-status').innerText = "❌ Failed to get GPS location.";
 }
 
 function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
-  const R = 6371000;
+  const R = 6371000; // Radius of Earth in meters
   const dLat = deg2rad(lat2 - lat1);
   const dLon = deg2rad(lon2 - lon1);
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
