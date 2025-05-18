@@ -61,7 +61,7 @@ async function checkIn() {
   if (!name) return alert("Please enter your name");
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzW6ZAdpmwixg6-CnTf0qQzfVoGWWOY9caq4CVtzkG_tAIveLhbWYxswJVCU-LAis8E/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzzekSD8pgDDu0wGb0qbBIOQhzoDXWXm59X6vssIL5gndoFxVeEnQ9kIZYeuab97tsj/exec', {
       method: 'POST',
       body: JSON.stringify({ name, action: "checkin" })
     });
@@ -78,7 +78,7 @@ async function checkOut() {
   if (!name) return alert("Please enter your name");
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzW6ZAdpmwixg6-CnTf0qQzfVoGWWOY9caq4CVtzkG_tAIveLhbWYxswJVCU-LAis8E/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzzekSD8pgDDu0wGb0qbBIOQhzoDXWXm59X6vssIL5gndoFxVeEnQ9kIZYeuab97tsj/exec', {
       method: 'POST',
       body: JSON.stringify({ name, action: "checkout" })
     });
