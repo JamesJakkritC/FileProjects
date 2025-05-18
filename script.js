@@ -58,7 +58,7 @@ function deg2rad(deg) {
 
 async function checkIn() {
   const name = document.getElementById('name').value;
-  const url = `https://script.google.com/macros/s/AKfycbxy5-Ii9z-ehdAhiaJj2LH77AQ_JvtMmtQKeiQzNNhf_EixNKLfiKTPQ9bF4dHgve9S/exec?name=${encodeURIComponent(name)}&action=checkin`;
+  const url = `https://script.google.com/macros/s/AKfycby2f6ydYeV99E8cqe2BpjWmzuBHtTITI_M1eD_7X5ygPOGGQ2NkEtkAjnJkokDuRVbw/exec?name=${encodeURIComponent(name)}&action=checkin`;
 
   try {
     const response = await fetch(url);
@@ -72,7 +72,7 @@ async function checkIn() {
 
 async function checkOut() {
   const name = document.getElementById('name').value;
-  const url = `https://script.google.com/macros/s/AKfycbxy5-Ii9z-ehdAhiaJj2LH77AQ_JvtMmtQKeiQzNNhf_EixNKLfiKTPQ9bF4dHgve9S/exec?name=${encodeURIComponent(name)}&action=checkout`;
+  const url = `https://script.google.com/macros/s/AKfycby2f6ydYeV99E8cqe2BpjWmzuBHtTITI_M1eD_7X5ygPOGGQ2NkEtkAjnJkokDuRVbw/exec?name=${encodeURIComponent(name)}&action=checkout`;
 
   try {
     const response = await fetch(url);
