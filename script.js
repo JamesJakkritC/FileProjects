@@ -58,34 +58,28 @@ function deg2rad(deg) {
 
 async function checkIn() {
   const name = document.getElementById('name').value;
-  if (!name) return alert("Please enter your name");
+  const url = `https://script.google.com/macros/s/AKfycbxy5-Ii9z-ehdAhiaJj2LH77AQ_JvtMmtQKeiQzNNhf_EixNKLfiKTPQ9bF4dHgve9S/exec?name=${encodeURIComponent(name)}&action=checkin`;
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzzekSD8pgDDu0wGb0qbBIOQhzoDXWXm59X6vssIL5gndoFxVeEnQ9kIZYeuab97tsj/exec', {
-      method: 'POST',
-      body: JSON.stringify({ name, action: "checkin" })
-    });
-    const result = await response.text();
-    document.getElementById("response").innerText = result;
+    const response = await fetch(url);
+    const text = await response.text();
+    document.getElementById('response').innerText = text;
   } catch (err) {
     console.error(err);
-    document.getElementById("response").innerText = "Check-in failed.";
+    document.getElementById('response').innerText = "Check-in failed";
   }
 }
 
 async function checkOut() {
   const name = document.getElementById('name').value;
-  if (!name) return alert("Please enter your name");
+  const url = `https://script.google.com/macros/s/AKfycbxy5-Ii9z-ehdAhiaJj2LH77AQ_JvtMmtQKeiQzNNhf_EixNKLfiKTPQ9bF4dHgve9S/exec?name=${encodeURIComponent(name)}&action=checkout`;
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzzekSD8pgDDu0wGb0qbBIOQhzoDXWXm59X6vssIL5gndoFxVeEnQ9kIZYeuab97tsj/exec', {
-      method: 'POST',
-      body: JSON.stringify({ name, action: "checkout" })
-    });
-    const result = await response.text();
-    document.getElementById("response").innerText = result;
+    const response = await fetch(url);
+    const text = await response.text();
+    document.getElementById('response').innerText = text;
   } catch (err) {
     console.error(err);
-    document.getElementById("response").innerText = "Check-out failed.";
+    document.getElementById('response').innerText = "Check-out failed";
   }
 }
