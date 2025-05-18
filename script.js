@@ -24,6 +24,7 @@ function success(position) {
 
   if (distance <= RANGE_METERS) {
     document.getElementById('checkin-btn').disabled = false;
+    document.getElementById('checkout-btn').disabled = false;
     document.getElementById('gps-status').innerText = `You are within ${Math.round(distance)} meters. You can check in.`;
   } else {
     document.getElementById('gps-status').innerText = `Too far from location (${Math.round(distance)}m). You cannot check in.`;
