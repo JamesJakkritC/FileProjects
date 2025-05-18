@@ -4,10 +4,14 @@
 //const DEFAULT_LNG = 99.0064;
 
 const ALLOWED_LOCATIONS = [
-  { lat: 18.7816, lng: 99.0064 },  // Location 1
-  { lat: 18.58128, lng: 99.04747 },  // Location 2
+  { lat: 18.7816, lng: 99.0064, name: "Nong Hoi" },  // Location 1
+  { lat: 18.58128, lng: 99.04747, name: "One Nimman" },  // Location 2
   //{ lat: 18.7700, lng: 99.0100 }   // Location 3
 ];
+
+let currentLocationName = "";
+let userLat = 0;
+let userLng = 0;
 
 const RANGE_METERS = 100;
 
@@ -24,32 +28,37 @@ window.onload = function () {
 };
 
 function success(position) {
-  const userLat = position.coords.latitude;
-  const userLng = position.coords.longitude;
+  userLat = position.coords.latitude;
+  userLng = position.coords.longitude;
 
   let withinRange = false;
   let nearestDistance = Infinity;
 
   for (const loc of ALLOWED_LOCATIONS) {
     const distance = getDistanceFromLatLonInMeters(loc.lat, loc.lng, userLat, userLng);
-    if (distance < nearestDistance) nearestDistance = distance;
-
-    if (distance <= RANGE_METERS) {
+    if (distance <= 100) {
       withinRange = true;
+      currentLocationName = loc.name;
       break;
+    } else if (distance < nearestDistance) {
+      nearestDistance = distance;
+      currentLocationName = ""; // Clear if not close enough
     }
   }
 
+  const checkinBtn = document.getElementById('checkin-btn');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
   if (withinRange) {
-    document.getElementById('checkin-btn').disabled = false;
-    document.getElementById('checkout-btn').disabled = false;
+    checkinBtn.disabled = false;
+    checkoutBtn.disabled = false;
     document.getElementById('gps-status').innerText =
-      `✅ You are within ${Math.round(nearestDistance)} meters of an allowed location.`;
+      `✅ You are near ${currentLocationName}`;
   } else {
-    document.getElementById('checkin-btn').disabled = true;
-    document.getElementById('checkout-btn').disabled = true;
+    checkinBtn.disabled = true;
+    checkoutBtn.disabled = true;
     document.getElementById('gps-status').innerText =
-      `🚫 Too far from any allowed location (${Math.round(nearestDistance)}m).`;
+      `🚫 Not near any allowed location (min dist: ${Math.round(nearestDistance)}m).`;
   }
 }
 
@@ -85,7 +94,7 @@ async function checkIn() {
     return;
   }
   
-  const url = `https://script.google.com/macros/s/AKfycbxPdCqO5HheZVtFIrHYzCzTvaK7_PcGYQXpzm4lhWB-ZUhR9oXVlQ2VMulAYeb2pyJM/exec?name=${encodeURIComponent(name)}&action=checkin`;
+  const url = `https://script.google.com/macros/s/AKfycbxa7qgp2-gO6ocys7_RCJNq0ZX5a__hpxyrvHWDvDAh0j9rYVxaupsLN0hb24z32zqN/exec?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
   try {
     const response = await fetch(url);
@@ -104,7 +113,7 @@ async function checkOut() {
     return;
   }
   
-  const url = `https://script.google.com/macros/s/AKfycbxPdCqO5HheZVtFIrHYzCzTvaK7_PcGYQXpzm4lhWB-ZUhR9oXVlQ2VMulAYeb2pyJM/exec?name=${encodeURIComponent(name)}&action=checkout`;
+  const url = `https://script.google.com/macros/s/AKfycbxa7qgp2-gO6ocys7_RCJNq0ZX5a__hpxyrvHWDvDAh0j9rYVxaupsLN0hb24z32zqN/exec?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
 
   try {
     const response = await fetch(url);
