@@ -16,11 +16,16 @@ function adminLogin() {
 
 function addLocation() {
     const name = document.getElementById("locationName").value;
-    const lat = document.getElementById("locationLat").value;
-    const lng = document.getElementById("locationLng").value;
+    const lat = parseFloat(document.getElementById("locationLat").value);
+    const lng = parseFloat(document.getElementById("locationLng").value);
 
     if (!name || !lat || !lng) {
         alert("❗ Please fill in all fields");
+        return;
+    }
+
+    if (isNaN(lat) || isNaN(lng)) {
+        alert('Invalid latitude or longitude');
         return;
     }
 
@@ -35,8 +40,11 @@ function addLocation() {
                 lng
             })
         })
-        .then(res => res.json())
-        .then(data => alert(data.message))
+        .then(response => response.json())
+        .then(data => {
+                          console.log("Server response:", data);
+                          alert(`✅ Added: ${data.location.name} (${data.location.lat}, ${data.location.lng})`);
+                        })
         .catch(err => alert("❌ Error saving location"));
 
     document.getElementById("locationName").value = "";
