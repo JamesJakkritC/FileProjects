@@ -1,38 +1,28 @@
 import fs from 'fs';
 import path from 'path';
 
+const tempFile = path.join('/tmp', 'locations.json');
+
 export default function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({
-            message: 'Method Not Allowed'
-        });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  const { name, lat, lng } = req.body;
+
+  let locations = [];
+
+  try {
+    if (fs.existsSync(tempFile)) {
+      const data = fs.readFileSync(tempFile, 'utf-8');
+      locations = JSON.parse(data);
     }
 
-    const {
-        name,
-        lat,
-        lng
-    } = req.body;
-    const filePath = path.join(process.cwd(), 'public', 'locations.json');
+    locations.push({ name, lat: parseFloat(lat), lng: parseFloat(lng) });
+    fs.writeFileSync(tempFile, JSON.stringify(locations, null, 2));
 
-    try {
-        const fileData = fs.readFileSync(filePath, 'utf-8');
-        const locations = JSON.parse(fileData);
-
-        locations.push({
-            name,
-            lat: parseFloat(lat),
-            lng: parseFloat(lng)
-        });
-        fs.writeFileSync(filePath, JSON.stringify(locations, null, 2));
-
-        return res.status(200).json({
-            message: '✅ Location added successfully'
-        });
-    } catch (err) {
-        return res.status(500).json({
-            message: '❌ Error updating locations',
-            error: err.message
-        });
-    }
+    return res.status(200).json({ message: '✅ Location added successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: '❌ Error saving location', error: err.message });
+  }
 }
