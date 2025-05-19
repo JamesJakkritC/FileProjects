@@ -121,3 +121,39 @@ async function checkOut() {
     document.getElementById('response').innerText = "Check-out failed";
   }
 }
+
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "123456"; // Change this securely in real applications
+
+function adminLogin() {
+  const user = document.getElementById("adminUsername").value;
+  const pass = document.getElementById("adminPassword").value;
+
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+    document.getElementById("locationForm").style.display = "block";
+    alert("✅ Login successful");
+  } else {
+    alert("❌ Invalid credentials");
+  }
+}
+
+function addLocation() {
+  const name = document.getElementById("locationName").value;
+  const lat = document.getElementById("locationLat").value;
+  const lng = document.getElementById("locationLng").value;
+
+  if (!name || !lat || !lng) {
+    alert("❗ All fields required");
+    return;
+  }
+
+  fetch(GOOGLE_SCRIPT_URL + `?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+    })
+    .catch(err => {
+      console.error(err);
+      alert("⚠️ Failed to save location.");
+    });
+}
