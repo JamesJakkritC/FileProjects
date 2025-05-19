@@ -14,29 +14,32 @@ function adminLogin() {
     }
 }
 
-function addLocation() {    
+function addLocation() {
     const name = document.getElementById("locationName").value;
-        if (!name) {
-            alert('Please enter Location Name !!!');
-            return;
-        }
     const lat = document.getElementById("locationLat").value;
-        if (!lat) {
-            alert('Please enter Latitude !!!');
-            return;
-        }
     const lng = document.getElementById("locationLng").value;
-        if (!lng) {
-            alert('Please enter Longitude !!!');
-            return;
-        }
 
-    fetch(`${GOOGLE_SCRIPT_URL}?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
-        .then(res => res.text())
-        .then(msg => alert(msg))
-        .catch(err => alert("❗ Error saving location"));
-    
-    document.getElementById("locationName").reset();
-    document.getElementById("locationLat").reset();
-    document.getElementById("locationLng").reset();
+    if (!name || !lat || !lng) {
+        alert("❗ Please fill in all fields");
+        return;
+    }
+
+    fetch("/api/add-location", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                lat,
+                lng
+            })
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(err => alert("❌ Error saving location"));
+
+    document.getElementById("locationName").value = "";
+    document.getElementById("locationLat").value = "";
+    document.getElementById("locationLng").value = "";
 }
