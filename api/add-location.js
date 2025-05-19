@@ -21,6 +21,7 @@ export default function handler(req, res) {
     locations.push({ name, lat: parseFloat(lat), lng: parseFloat(lng) });
     fs.writeFileSync(tempFile, JSON.stringify(locations, null, 2));
 
+    console.log('Sending response:', { name, lat, lng });
     return res.status(200).json({ message: '✅ Location added', location: { name, lat, lng } });
   } catch (err) {
     return res.status(500).json({ message: '❌ Error saving location', error: err.message });
