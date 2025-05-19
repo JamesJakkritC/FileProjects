@@ -15,9 +15,26 @@ function adminLogin() {
 }
 
 function addLocation() {
+      if (!name) {
+    alert('Please enter your name !!!');
+    return;
+  }
+    
     const name = document.getElementById("locationName").value;
+        if (!name) {
+            alert('Please enter locationName !!!');
+            return;
+        }
     const lat = document.getElementById("locationLat").value;
+        if (!lat) {
+            alert('Please enter locationLat !!!');
+            return;
+        }
     const lng = document.getElementById("locationLng").value;
+        if (!lng) {
+            alert('Please enter locationLng !!!');
+            return;
+        }
 
     fetch(`${GOOGLE_SCRIPT_URL}?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
         .then(res => res.text())
