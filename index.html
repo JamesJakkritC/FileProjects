@@ -18,6 +18,22 @@
     </div>
     <div class="message" id="message"></div>
   </div>
+
+  <!-- Admin Tab -->
+<div id="adminTab" style="margin-top: 2rem;">
+  <h2>Admin Login</h2>
+  <input type="text" id="adminUsername" placeholder="Username" />
+  <input type="password" id="adminPassword" placeholder="Password" />
+  <button onclick="adminLogin()">Login</button>
+
+  <div id="locationForm" style="display: none; margin-top: 1rem;">
+    <h3>Add Allowed Location</h3>
+    <input type="text" id="locationName" placeholder="Location Name" />
+    <input type="number" id="locationLat" placeholder="Latitude" />
+    <input type="number" id="locationLng" placeholder="Longitude" />
+    <button onclick="addLocation()">Save Location</button>
+  </div>
+</div>
   
   <script src="script.js"></script>
 </body>
