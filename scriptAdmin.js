@@ -17,17 +17,17 @@ function adminLogin() {
 function addLocation() {    
     const name = document.getElementById("locationName").value;
         if (!name) {
-            alert('Please enter locationName !!!');
+            alert('Please enter Location Name !!!');
             return;
         }
     const lat = document.getElementById("locationLat").value;
         if (!lat) {
-            alert('Please enter locationLat !!!');
+            alert('Please enter Latitude !!!');
             return;
         }
     const lng = document.getElementById("locationLng").value;
         if (!lng) {
-            alert('Please enter locationLng !!!');
+            alert('Please enter Longitude !!!');
             return;
         }
 
@@ -35,4 +35,8 @@ function addLocation() {
         .then(res => res.text())
         .then(msg => alert(msg))
         .catch(err => alert("❗ Error saving location"));
+    
+    document.getElementById("locationName").reset();
+    document.getElementById("locationLat").reset();
+    document.getElementById("locationLng").reset();
 }
