@@ -1,1 +1,66 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+    #locationForm {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔐 Admin Login</h2>
+  <input type="text" id="adminUsername" placeholder="Username" />
+  <input type="password" id="adminPassword" placeholder="Password" />
+  <button onclick="adminLogin()">Login</button>
 
+  <div id="locationForm" style="display:none;">
+    <h3>📍 Add Allowed Location</h3>
+    <input type="text" id="locationName" placeholder="Location Name" />
+    <input type="number" id="locationLat" placeholder="Latitude" />
+    <input type="number" id="locationLng" placeholder="Longitude" />
+    <button onclick="addLocation()">Save Location</button>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYED_URL/exec';
+    const ADMIN_USER = "admin";
+    const ADMIN_PASS = "123456";
+
+    function adminLogin() {
+      const user = document.getElementById("adminUsername").value;
+      const pass = document.getElementById("adminPassword").value;
+
+      if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        document.getElementById("locationForm").style.display = "block";
+        alert("✅ Login successful");
+      } else {
+        alert("❌ Invalid credentials");
+      }
+    }
+
+    function addLocation() {
+      const name = document.getElementById("locationName").value;
+      const lat = document.getElementById("locationLat").value;
+      const lng = document.getElementById("locationLng").value;
+
+      fetch(`${GOOGLE_SCRIPT_URL}?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
+        .then(res => res.text())
+        .then(msg => alert(msg))
+        .catch(err => alert("❗ Error saving location"));
+    }
+  </script>
+</body>
+</html>
