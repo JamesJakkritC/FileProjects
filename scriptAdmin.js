@@ -14,12 +14,7 @@ function adminLogin() {
     }
 }
 
-function addLocation() {
-      if (!name) {
-    alert('Please enter your name !!!');
-    return;
-  }
-    
+function addLocation() {    
     const name = document.getElementById("locationName").value;
         if (!name) {
             alert('Please enter locationName !!!');
