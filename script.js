@@ -1,18 +1,4 @@
-const ALLOWED_LOCATIONS = [
-    //{ lat: 18.7816, lng: 99.0064, name: "Nong Hoi" },  // Me1
-    //{ lat: 18.58128, lng: 99.04747, name: "One Nimman" },  // Me2
-    {
-        lat: 18.751662,
-        lng: 99.012689,
-        name: "Nong Hoi"
-    }, // Location 1
-    {
-        lat: 18.800008,
-        lng: 98.969783,
-        name: "One Nimman"
-    }, // Location 2
-    //{ lat: 18.7700, lng: 99.0100 }   // Location 3
-];
+let ALLOWED_LOCATIONS = [];
 
 let currentLocationName = "";
 let userLat = 0;
@@ -20,7 +6,18 @@ let userLng = 0;
 
 const RANGE_METERS = 100;
 
-window.onload = function() {
+window.onload = async function () {
+    try {
+        const res = await fetch("locations.json");
+        ALLOWED_LOCATIONS = await res.json();
+        initGeolocation(); // Start GPS check after loading locations
+    } catch (err) {
+        document.getElementById('gps-status').innerText = "❌ Failed to load location data.";
+        console.error("Failed to load locations.json", err);
+    }
+};
+
+function initGeolocation() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(success, error, {
             enableHighAccuracy: true,
@@ -30,7 +27,7 @@ window.onload = function() {
     } else {
         document.getElementById('gps-status').innerText = "Geolocation not supported.";
     }
-};
+}
 
 function success(position) {
     userLat = position.coords.latitude;
