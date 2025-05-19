@@ -91,7 +91,7 @@ async function checkIn() {
     return;
   }
   
-  const url = `https://script.google.com/macros/s/AKfycbye3yBby9QDS5Op6Wf1eEDCF1iPEh3W7srVfKBuS0ikoXqPx_pgDS9yx3kq-4zCTsFL/exec?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
+  const url = `https://script.google.com/macros/s/AKfycbwIIaXv0d9z-bWEFANgIWJLiTZbNwSVuhTFf_NQEHZEb1HIbFD5qxhExV17CbOD7mjk/exec?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
   try {
     const response = await fetch(url);
@@ -110,7 +110,7 @@ async function checkOut() {
     return;
   }
   
-  const url = `https://script.google.com/macros/s/AKfycbye3yBby9QDS5Op6Wf1eEDCF1iPEh3W7srVfKBuS0ikoXqPx_pgDS9yx3kq-4zCTsFL/exec?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
+  const url = `https://script.google.com/macros/s/AKfycbwIIaXv0d9z-bWEFANgIWJLiTZbNwSVuhTFf_NQEHZEb1HIbFD5qxhExV17CbOD7mjk/exec?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
 
   try {
     const response = await fetch(url);
@@ -147,6 +147,7 @@ function addLocation() {
     return;
   }
 
+  const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbwIIaXv0d9z-bWEFANgIWJLiTZbNwSVuhTFf_NQEHZEb1HIbFD5qxhExV17CbOD7mjk/exec`;
   fetch(GOOGLE_SCRIPT_URL + `?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
     .then(response => response.text())
     .then(data => {
