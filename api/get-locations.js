@@ -1,19 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
-const tempFile = path.join('/tmp', 'locations.json');
-
 export default function handler(req, res) {
-  try {
-      if (!fs.existsSync(tempFile)) {
-        console.log("No file found");
-        return res.status(200).json([]); // <- will return empty if file was never created
-      }
+  const filePath = path.join(process.cwd(), 'locations.json');
 
-    const data = fs.readFileSync(tempFile, 'utf-8');
-    const locations = JSON.parse(data);
-    return res.status(200).json(locations);
-  } catch (err) {
-    return res.status(500).json({ message: '❌ Failed to read locations', error: err.message });
+  if (!fs.existsSync(filePath)) {
+    return res.status(200).json([]); // return empty array if no file
   }
+
+  const data = fs.readFileSync(filePath);
+  const locations = JSON.parse(data);
+
+  res.status(200).json(locations);
 }
