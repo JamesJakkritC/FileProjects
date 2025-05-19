@@ -1,12 +1,39 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Check In App</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Check-In System</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-link {
+      font-size: 16px;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #eee;
+      color: #333;
+    }
+    .admin-link:hover {
+      background: #ccc;
+    }
+  </style>
 </head>
 <body>
+  <div class="top-bar">
+    <h1>🕒 Check-In App</h1>
+    <a class="admin-link" href="admin.html">🔒 Admin</a>
+  </div>
+
+  <!-- Check-in/out form here -->
     <div class="container">
     <h2>Employee Check-In</h2>
     <input type="text" id="name" placeholder="Enter your name" />
@@ -19,22 +46,6 @@
     <div class="message" id="message"></div>
   </div>
 
-  <!-- Admin Tab -->
-<div id="adminTab" style="margin-top: 2rem;">
-  <h2>Admin Login</h2>
-  <input type="text" id="adminUsername" placeholder="Username" />
-  <input type="password" id="adminPassword" placeholder="Password" />
-  <button onclick="adminLogin()">Login</button>
-
-  <div id="locationForm" style="display: none; margin-top: 1rem;">
-    <h3>Add Allowed Location</h3>
-    <input type="text" id="locationName" placeholder="Location Name" />
-    <input type="number" id="locationLat" placeholder="Latitude" />
-    <input type="number" id="locationLng" placeholder="Longitude" />
-    <button onclick="addLocation()">Save Location</button>
-  </div>
-</div>
-  
   <script src="script.js"></script>
 </body>
 </html>
