@@ -1,25 +1,21 @@
-import fs from 'fs';
-import path from 'path';
+function addLocation() {
+  const name = document.getElementById("locationName").value;
+  const lat = document.getElementById("locationLat").value;
+  const lng = document.getElementById("locationLng").value;
 
-export default function handler(req, res) {
-  if (req.method === 'POST') {
-    const { name, lat, lng } = req.body;
-    const filePath = path.join(process.cwd(), 'locations.json');
-
-    let locations = [];
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath);
-      locations = JSON.parse(raw);
-    }
-
-    locations.push({ name, lat, lng });
-    fs.writeFileSync(filePath, JSON.stringify(locations, null, 2));
-
-    return res.status(200).json({
-      message: '✅ Location added',
-      location: { name, lat, lng },
-    });
+  if (!name || !lat || !lng) {
+    alert("❗ All fields required");
+    return;
   }
 
-  res.status(405).json({ message: 'Method not allowed' });
+  const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbz6Zgp6P1D3lfpwHCFbkvkMIv3QGlG1CDWSnCasI3Djx4qY8r-I1lJ400-7df2W_RmL/exec`;
+  fetch(GOOGLE_SCRIPT_URL + `?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+    })
+    .catch(err => {
+      console.error(err);
+      alert("⚠️ Failed to save location.");
+    });
 }
