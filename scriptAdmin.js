@@ -18,6 +18,7 @@ function addLocation() {
     const name = document.getElementById("locationName").value;
     const lat = parseFloat(document.getElementById("locationLat").value);
     const lng = parseFloat(document.getElementById("locationLng").value);
+    const statusEl = document.getElementById("location-status");
 
     if (!name || !lat || !lng) {
         alert("❗ Please fill in all fields");
@@ -29,17 +30,21 @@ function addLocation() {
         return;
     }
 
-  fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
-    .then(response => response.text())
-    .then(data => {
-      alert(data);
-    })
-    .catch(err => {
-      console.error(err);
-      alert("⚠️ Failed to save location.");
-    });
-
-    document.getElementById("locationName").value = "";
-    document.getElementById("locationLat").value = "";
-    document.getElementById("locationLng").value = "";
+    fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
+        .then(response => response.text())
+        .then(data => {
+            statusEl.innerText = data;
+            statusEl.style.color = "green";
+        })
+        .catch(err => {
+            console.error(err);
+            statusEl.innerText = "⚠️ Failed to save location.";
+            statusEl.style.color = "red";
+        })
+        .finally(() => {
+            // Clear form fields
+            document.getElementById("locationName").value = "";
+            document.getElementById("locationLat").value = "";
+            document.getElementById("locationLng").value = "";
+        });
 }
