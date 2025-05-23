@@ -29,7 +29,7 @@ function addLocation() {
         return;
     }
 
-  fetch(GOOGLE_SCRIPT_URL + `?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
+  fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
     .then(response => response.text())
     .then(data => {
       alert(data);
