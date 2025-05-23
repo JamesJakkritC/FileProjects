@@ -29,23 +29,15 @@ function addLocation() {
         return;
     }
 
-    fetch("/api/add-location", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                lat,
-                lng
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-                          console.log("Server response:", data);
-                          alert(`✅ Added: ${data.location.name} (${data.location.lat}, ${data.location.lng})`);
-                        })
-        .catch(err => alert("❌ Error saving location"));
+  fetch(GOOGLE_SCRIPT_URL + `?action=add_location&name=${name}&lat=${lat}&lng=${lng}`)
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+    })
+    .catch(err => {
+      console.error(err);
+      alert("⚠️ Failed to save location.");
+    });
 
     document.getElementById("locationName").value = "";
     document.getElementById("locationLat").value = "";
