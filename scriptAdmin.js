@@ -18,7 +18,7 @@ function addLocation() {
     const name = document.getElementById("locationName").value;
     const lat = parseFloat(document.getElementById("locationLat").value);
     const lng = parseFloat(document.getElementById("locationLng").value);
-    const statusEl = document.getElementById("location-status");
+    const modal = document.getElementById("loadingModal");
 
     if (!name || !lat || !lng) {
         alert("❗ Please fill in all fields");
@@ -30,19 +30,19 @@ function addLocation() {
         return;
     }
 
+    modal.style.display = "flex";  // Show loading modal
+    
     fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
         .then(response => response.text())
         .then(data => {
-            statusEl.innerText = data;
-            statusEl.style.color = "green";
+            alert(data);
         })
         .catch(err => {
             console.error(err);
-            statusEl.innerText = "⚠️ Failed to save location.";
-            statusEl.style.color = "red";
+            alert("⚠️ Failed to save location.");
         })
         .finally(() => {
-            // Clear form fields
+            modal.style.display = "none";  // Hide modal
             document.getElementById("locationName").value = "";
             document.getElementById("locationLat").value = "";
             document.getElementById("locationLng").value = "";
