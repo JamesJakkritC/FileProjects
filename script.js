@@ -1,5 +1,5 @@
 let ALLOWED_LOCATIONS = [];
-const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbwkIZhpy4XwmK4Gp2mVmWieJUaCfYZL2QOAJYM6uAPhaCcad5ZYrIveTybN128FtfgM/exec`;
+const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbxGzPWbixp2Wh-vVdsf_1fR5W5uUrlSpcqBPYNY1u7rh2l23SMs1vaVAgeY_TPoD3b9/exec`;
 let currentLocationName = "";
 let userLat = 0;
 let userLng = 0;
