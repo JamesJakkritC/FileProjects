@@ -9,7 +9,7 @@ const RANGE_METERS = 100;
 window.onload = async function () {
     try {
         //const res = await fetch("locations.json");
-        const res = await fetch('https://script.google.com/macros/s/AKfycbynWe_GmPymYx3gDQDOqtf9ISPYWx2596K0241o75mKcglElb4YmNWfm_IIY9UrVFJR/exec?action=getLocations');
+        const res = await fetch('https://script.google.com/macros/s/AKfycbylLMsIelEtc3pEPfT3YLhiZwr0ckv1hOwuuL4ft_ZptuLXzoLhFODD7d5Li0uMnHV0/exec?action=getLocations');
         ALLOWED_LOCATIONS = await res.json();
         initGeolocation(); // Start GPS check after loading locations
     } catch (err) {
@@ -97,7 +97,7 @@ async function checkIn() {
         return;
     }
 
-    const url = `https://script.google.com/macros/s/AKfycbynWe_GmPymYx3gDQDOqtf9ISPYWx2596K0241o75mKcglElb4YmNWfm_IIY9UrVFJR/exec?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
+    const url = `https://script.google.com/macros/s/AKfycbylLMsIelEtc3pEPfT3YLhiZwr0ckv1hOwuuL4ft_ZptuLXzoLhFODD7d5Li0uMnHV0/exec?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
@@ -116,7 +116,7 @@ async function checkOut() {
         return;
     }
 
-    const url = `https://script.google.com/macros/s/AKfycbynWe_GmPymYx3gDQDOqtf9ISPYWx2596K0241o75mKcglElb4YmNWfm_IIY9UrVFJR/exec?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
+    const url = `https://script.google.com/macros/s/AAKfycbylLMsIelEtc3pEPfT3YLhiZwr0ckv1hOwuuL4ft_ZptuLXzoLhFODD7d5Li0uMnHV0/exec?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
