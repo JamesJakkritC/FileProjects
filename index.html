@@ -1,51 +1,97 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Check-In System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: sans-serif;
-      padding: 2rem;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
     }
-    .top-bar {
+    header {
+      background-color: #fff;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
     }
     .admin-link {
-      font-size: 16px;
       text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      background: #eee;
-      color: #333;
+      background: #333;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
     }
-    .admin-link:hover {
-      background: #ccc;
+    .container {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button {
+      width: 48%;
+      padding: 10px;
+      font-size: 14px;
+      margin: 10px 1%;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #gps-status, #response {
+      font-size: 14px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="top-bar">
-    <h1>🕒 Check-In App</h1>
-    <a class="admin-link" href="admin.html">🔒 Admin</a>
-  </div>
 
-  <!-- Check-in/out form here -->
-    <div class="container">
-    <h2>Employee Check-In</h2>
-    <input type="text" id="name" placeholder="Enter your name" />
-    <div>
-      <button id="checkin-btn" onclick="checkIn()" disabled>Time In</button>
-      <button id="checkout-btn" onclick="checkOut()" disabled>Time Out</button>
-      <p id="gps-status">Getting your location...</p>
-       <p id="response"></p>
-    </div>
-    <div class="message" id="message"></div>
-  </div>
+<header>
+  <h1>🕒 Check-In App</h1>
+  <a class="admin-link" href="admin.html">🔒 Admin</a>
+</header>
 
-  <script src="script.js"></script>
+<div class="container">
+  <h2>Employee Check-In</h2>
+  <input type="text" id="name" placeholder="Enter your name" />
+  <div style="display:flex; justify-content:space-between;">
+    <button id="checkin-btn" onclick="checkIn()" disabled>Time In</button>
+    <button id="checkout-btn" onclick="checkOut()" disabled>Time Out</button>
+  </div>
+  <p id="gps-status">📍 Locating...</p>
+  <p id="response"></p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
