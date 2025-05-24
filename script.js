@@ -97,7 +97,7 @@ async function checkIn() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkIn&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
@@ -116,7 +116,7 @@ async function checkOut() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkOut&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
