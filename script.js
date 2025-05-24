@@ -1,5 +1,5 @@
 let ALLOWED_LOCATIONS = [];
-const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbxOAfEkeoozGTSbEX2vhmHQ-L-nhnXshnsXhWXIZ-m-m539N6gQaz0e6f6Wj09A52lr/exec`;
+const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbwDKkWHWcePWkPcnEKC8-D3s8eFW9Icob53a_YgI-6B3CApfyBfka92hF7LWaJG6f33/exec`;
 let currentLocationName = "";
 let userLat = 0;
 let userLng = 0;
@@ -97,7 +97,7 @@ async function checkIn() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkIn&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
@@ -116,7 +116,7 @@ async function checkOut() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkOut&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
