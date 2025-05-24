@@ -117,7 +117,17 @@ button#checkout-btn {
   margin: auto;
 }
 
+.center-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.location-section {
+  margin-top: 40px;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
