@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbxOAfEkeoozGTSbEX2vhmHQ-L-nhnXshnsXhWXIZ-m-m539N6gQaz0e6f6Wj09A52lr/exec`;
+const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbwDKkWHWcePWkPcnEKC8-D3s8eFW9Icob53a_YgI-6B3CApfyBfka92hF7LWaJG6f33/exec`;
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "123456";
 
