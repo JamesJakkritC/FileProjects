@@ -1,5 +1,5 @@
 let ALLOWED_LOCATIONS = [];
-
+const GOOGLE_SCRIPT_URL = `https://script.google.com/macros/s/AKfycbylLMsIelEtc3pEPfT3YLhiZwr0ckv1hOwuuL4ft_ZptuLXzoLhFODD7d5Li0uMnHV0/exec`;
 let currentLocationName = "";
 let userLat = 0;
 let userLng = 0;
