@@ -57,10 +57,10 @@ function success(position) {
     
     if (withinRange) {
       currentLocationName = currentLocationName;
-      document.getElementById('gps-status').innerText = `✅ You are near ${currentLocationName}`;
+      //document.getElementById('gps-status').innerText = `✅ You are near ${currentLocationName}`;
     } else {
       currentLocationName = ""; // Clear current location
-      document.getElementById('gps-status').innerText = `⚠️ You are not near any allowed location.`;
+      //document.getElementById('gps-status').innerText = `⚠️ You are not near any allowed location.`;
     }
 }
 
