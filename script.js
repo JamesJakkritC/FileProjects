@@ -12,6 +12,7 @@ const RANGE_METERS = 100;
 window.onload = async function () {
     try {
         //const res = await fetch("locations.json");
+        showLoading(true);
         const res = await fetch(GOOGLE_SCRIPT_URL + `?action=getLocations`);
         ALLOWED_LOCATIONS = await res.json();
         initGeolocation(); // Start GPS check after loading locations
@@ -19,6 +20,7 @@ window.onload = async function () {
     } catch (err) {
         document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
         console.error("Failed to load locations.json", err);
+        showLoading(false);
     }
 };
 
@@ -31,6 +33,7 @@ function initGeolocation() {
         });
     } else {
         document.getElementById('gps-status').innerText = "Geolocation not supported.";
+        showLoading(false);
     }
 }
 
@@ -66,11 +69,13 @@ function success(position) {
       currentLocationName = ""; // Clear current location
       //document.getElementById('gps-status').innerText = `⚠️ You are not near any allowed location.`;
     }
+    showLoading(false);
 }
 
 function error(err) {
     console.error(err);
     document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
+    showLoading(false);
 }
 
 function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
