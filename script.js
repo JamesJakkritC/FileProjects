@@ -52,16 +52,15 @@ function success(position) {
     const checkinBtn = document.getElementById('checkin-btn');
     const checkoutBtn = document.getElementById('checkout-btn');
 
+    checkinBtn.disabled = false;
+    checkoutBtn.disabled = false;
+    
     if (withinRange) {
-        checkinBtn.disabled = false;
-        checkoutBtn.disabled = false;
-        document.getElementById('gps-status').innerText =
-            `✅ You are near ${currentLocationName}`;
+      currentLocationName = currentLocationName;
+      document.getElementById('gps-status').innerText = `✅ You are near ${currentLocationName}`;
     } else {
-        checkinBtn.disabled = true;
-        checkoutBtn.disabled = true;
-        document.getElementById('gps-status').innerText =
-            `🚫 Not near any allowed location (min dist: ${Math.round(nearestDistance)}m).`;
+      currentLocationName = ""; // Clear current location
+      document.getElementById('gps-status').innerText = `⚠️ You are not near any allowed location.`;
     }
 }
 
