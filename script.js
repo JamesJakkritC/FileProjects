@@ -104,13 +104,13 @@ async function checkIn() {
 
     if (!isValidEmployeeCode(name)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
-        hideLoading();
+        showLoading(false);
         return;
     }
 
     if (!currentLocationName) {
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
-        hideLoading();
+        showLoading(false);
         return;
     }
 
@@ -126,7 +126,7 @@ async function checkIn() {
         //document.getElementById('response').innerText = "Check-in failed";
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
     } finally {
-    hideLoading();
+    showLoading(false);
   }
 }
 
@@ -135,23 +135,23 @@ async function checkIn() {
 //////////////////////////////////////////////////////////////
 async function checkOut() {
     const name = document.getElementById('name').value;
-    showLoading(true); // Show loading modal
+    showLoading; // Show loading modal
     
     if (!name) {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
-        hideLoading();
+        hideLoading;
         return;
     }
 
     if (!isValidEmployeeCode(name)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
-        hideLoading();
+        hideLoading;
         return;
     }
     
     if (!currentLocationName) {
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
-        hideLoading();
+        hideLoading;
         return;
     }
 
@@ -167,7 +167,7 @@ async function checkOut() {
         //document.getElementById('response').innerText = "Check-out failed";
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
     } finally {
-    hideLoading();
+    hideLoading;
   }
 }
 
@@ -182,11 +182,11 @@ function showLoading(show) {
 }
 
 function showLoading() {
-  document.getElementById("loadingModal").style.display = "block";
+  document.getElementById("loadingModal").style.display = "true";
 }
 
 function hideLoading() {
-  document.getElementById("loadingModal").style.display = "none";
+  document.getElementById("loadingModal").style.display = "false";
 }
 
 //////////////////////////////////////////////////////////////
