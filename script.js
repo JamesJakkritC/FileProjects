@@ -180,15 +180,6 @@ function showLoading(show) {
     modal.style.display = show ? "flex" : "none";
   }
 }
-
-function showLoading() {
-  document.getElementById("loadingModal").style.display = "true";
-}
-
-function hideLoading() {
-  document.getElementById("loadingModal").style.display = "false";
-}
-
 //////////////////////////////////////////////////////////////
 // 5. Get Employee Codes from Google sheet
 //////////////////////////////////////////////////////////////
