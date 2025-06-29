@@ -13,7 +13,7 @@ window.onload = async function () {
         ALLOWED_LOCATIONS = await res.json();
         initGeolocation(); // Start GPS check after loading locations
     } catch (err) {
-        document.getElementById('gps-status').innerText = "❌ Failed to load location data.";
+        document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
         console.error("Failed to load locations.json", err);
     }
 };
@@ -66,7 +66,7 @@ function success(position) {
 
 function error(err) {
     console.error(err);
-    document.getElementById('gps-status').innerText = "❌ Failed to get GPS location.";
+    document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
 }
 
 function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
@@ -92,12 +92,12 @@ function deg2rad(deg) {
 async function checkIn() {
     const name = document.getElementById('name').value;
     if (!name) {
-        alert('กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!!');
+        alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
         return;
     }
 
     if (!currentLocationName) {
-    alert("🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။");
+    alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
     return;
     }
 
@@ -112,19 +112,19 @@ async function checkIn() {
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-in failed";
-        alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။);
+        alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
     }
 }
 
 async function checkOut() {
     const name = document.getElementById('name').value;
     if (!name) {
-        alert('Please enter your name !!!');
+        alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
         return;
     }
     
     if (!currentLocationName) {
-    alert("🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။");
+    alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
     return;
     }
 
@@ -138,6 +138,6 @@ async function checkOut() {
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-out failed";
-        alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။);
+        alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
     }
 }
