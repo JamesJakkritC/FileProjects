@@ -9,7 +9,6 @@ const RANGE_METERS = 100;
 //////////////////////////////////////////////////////////////
 // 1. Start loading the GPS Location
 //////////////////////////////////////////////////////////////
-
 window.onload = async function () {
     try {
         //const res = await fetch("locations.json");
@@ -93,7 +92,6 @@ function deg2rad(deg) {
 //////////////////////////////////////////////////////////////
 // 2. Action checkIn()
 //////////////////////////////////////////////////////////////
-
 async function checkIn() {
     const name = document.getElementById('name').value;
     showLoading(true); // Show loading modal
@@ -106,13 +104,13 @@ async function checkIn() {
 
     if (!isValidEmployeeCode(name)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
-        showLoading(false);
+        hideLoading();
         return;
     }
 
     if (!currentLocationName) {
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
-        showLoading(false);
+        hideLoading();
         return;
     }
 
@@ -123,38 +121,37 @@ async function checkIn() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
-        showLoading(false);
+        hideLoading();
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-in failed";
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
-        showLoading(false);
+        hideLoading();
     }
 }
 
 //////////////////////////////////////////////////////////////
 // 3. Action checkOut()
 //////////////////////////////////////////////////////////////
-
 async function checkOut() {
     const name = document.getElementById('name').value;
     showLoading(true); // Show loading modal
     
     if (!name) {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
-        showLoading(false);
+        hideLoading();
         return;
     }
 
     if (!isValidEmployeeCode(name)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
-        showLoading(false);
+        hideLoading();
         return;
     }
     
     if (!currentLocationName) {
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
-        showLoading(false);
+        hideLoading();
         return;
     }
 
@@ -165,19 +162,18 @@ async function checkOut() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
-        showLoading(false);
+        hideLoading();
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-out failed";
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
-        showLoading(false);
+        hideLoading();
     }
 }
 
 //////////////////////////////////////////////////////////////
 // 4. showLoading
 //////////////////////////////////////////////////////////////
-
 function showLoading(show) {
   const modal = document.getElementById("loadingModal");
   if (modal) {
@@ -185,14 +181,24 @@ function showLoading(show) {
   }
 }
 
+function showLoading() {
+  document.getElementById("loadingModal").style.display = "block";
+}
+
+function hideLoading() {
+  document.getElementById("loadingModal").style.display = "none";
+}
+
 //////////////////////////////////////////////////////////////
 // 5. Get Employee Codes from Google sheet
 //////////////////////////////////////////////////////////////
+let validEmployeeCodes = [];
 
 function fetchEmployeeCodes() {
   fetch(GOOGLE_SCRIPT_URL + "?action=getEmployees")
     .then(res => res.json())
     .then(data => {
+      validEmployeeCodes = data.map(code => code.trim().toLowerCase());
       const datalist = document.getElementById("employeeList");
       datalist.innerHTML = "";
       data.forEach(code => {
@@ -209,7 +215,6 @@ function fetchEmployeeCodes() {
 //////////////////////////////////////////////////////////////
 // 6. Validate EmployeeCode
 //////////////////////////////////////////////////////////////
-
 function isValidEmployeeCode(code) {
   return validEmployeeCodes.includes(code.trim().toLowerCase());
 }
