@@ -92,7 +92,7 @@ function deg2rad(deg) {
 async function checkIn() {
     const name = document.getElementById('name').value;
     if (!name) {
-        alert('Please enter your name !!!');
+        alert('กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!!');
         return;
     }
 
