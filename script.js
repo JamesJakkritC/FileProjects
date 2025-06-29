@@ -121,13 +121,13 @@ async function checkIn() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
-        hideLoading();
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-in failed";
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
-        hideLoading();
-    }
+    } finally {
+    hideLoading();
+  }
 }
 
 //////////////////////////////////////////////////////////////
@@ -162,13 +162,13 @@ async function checkOut() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
-        hideLoading();
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-out failed";
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
-        hideLoading();
-    }
+    } finally {
+    hideLoading();
+  }
 }
 
 //////////////////////////////////////////////////////////////
