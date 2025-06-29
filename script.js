@@ -96,6 +96,8 @@ async function checkIn() {
         return;
     }
 
+    showLoading(true); // Show loading modal
+
     if (!currentLocationName) {
     alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
     return;
@@ -122,6 +124,8 @@ async function checkOut() {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
         return;
     }
+
+    showLoading(true); // Show loading modal
     
     if (!currentLocationName) {
     alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
@@ -140,4 +144,11 @@ async function checkOut() {
         //document.getElementById('response').innerText = "Check-out failed";
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
     }
+}
+
+function showLoading(show) {
+  const modal = document.getElementById("loadingModal");
+  if (modal) {
+    modal.style.display = show ? "flex" : "none";
+  }
 }
