@@ -6,6 +6,10 @@ let userLng = 0;
 
 const RANGE_METERS = 100;
 
+//////////////////////////////////////////////////////////////
+// 1. Start loading the GPS Location
+//////////////////////////////////////////////////////////////
+
 window.onload = async function () {
     try {
         //const res = await fetch("locations.json");
@@ -86,23 +90,24 @@ function deg2rad(deg) {
 }
 
 //////////////////////////////////////////////////////////////
-// 2. Your existing checkIn() function (leave as-is or after)
+// 2. Action checkIn()
 //////////////////////////////////////////////////////////////
 
 async function checkIn() {
     const name = document.getElementById('name').value;
+    showLoading(true); // Show loading modal
+    
     if (!name) {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
+        showLoading(false);
         return;
     }
 
-    showLoading(true); // Show loading modal
-
     if (!currentLocationName) {
-    alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
-    return;
+        alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။ ");
+        showLoading(false);
+        return;
     }
-
 
     const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
@@ -111,25 +116,33 @@ async function checkIn() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
+        showLoading(false);
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-in failed";
         alert(" 🚫 บันทึกเวลาเข้างานไม่สำเร็จ กรุณากดบันทึกเวลาเข้างานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
+        showLoading(false);
     }
 }
 
+//////////////////////////////////////////////////////////////
+// 3. Action checkOut()
+//////////////////////////////////////////////////////////////
+
 async function checkOut() {
     const name = document.getElementById('name').value;
-    if (!name) {
-        alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
-        return;
-    }
-
     showLoading(true); // Show loading modal
     
+    if (!name) {
+        alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
+        showLoading(false);
+        return;
+    }
+    
     if (!currentLocationName) {
-    alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
-    return;
+        alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။ ");
+        showLoading(false);
+        return;
     }
 
     const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
@@ -139,12 +152,18 @@ async function checkOut() {
         const text = await response.text();
         //document.getElementById('response').innerText = text;
         alert(text);
+        showLoading(false);
     } catch (err) {
         console.error(err);
         //document.getElementById('response').innerText = "Check-out failed";
         alert(" 🚫 บันทึกเวลาออกงานไม่สำเร็จ กรุณากดบันทึกเวลาออกงานใหม่อีกครั้ง. \n 🚫 အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ အလုပ်ချိန်ကို မှတ်တမ်းတင်ရန် ထပ်မံနှိပ်ပါ။ ");
+        showLoading(false);
     }
 }
+
+//////////////////////////////////////////////////////////////
+// 4. showLoading
+//////////////////////////////////////////////////////////////
 
 function showLoading(show) {
   const modal = document.getElementById("loadingModal");
