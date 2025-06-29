@@ -96,6 +96,12 @@ async function checkIn() {
         return;
     }
 
+    if (!currentLocationName) {
+    alert("🚫 Not near any allowed location. You must be within 100 meters to check in.");
+    return;
+    }
+
+
     const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
@@ -113,6 +119,11 @@ async function checkOut() {
     if (!name) {
         alert('Please enter your name !!!');
         return;
+    }
+    
+    if (!currentLocationName) {
+    alert("🚫 Not near any allowed location. You must be within 100 meters to check out.");
+    return;
     }
 
     const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
