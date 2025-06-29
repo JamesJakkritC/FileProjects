@@ -198,7 +198,7 @@ function fetchEmployeeCodes() {
   fetch(GOOGLE_SCRIPT_URL + "?action=getEmployees")
     .then(res => res.json())
     .then(data => {
-      validEmployeeCodes = data.map(code => code.trim().toLowerCase());
+      validEmployeeCodes = data.map(code => String(code).trim().toLowerCase()).filter(code => code !== "");
       const datalist = document.getElementById("employeeList");
       datalist.innerHTML = "";
       data.forEach(code => {
