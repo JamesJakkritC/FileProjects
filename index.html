@@ -15,7 +15,8 @@
 
 <div class="container">
   <h2>Employee Check-In</h2>
-  <input type="text" id="name" placeholder=" รหัสพนักงาน/ဝန်ထမ်းကုဒ် " />
+  <input type="text" id="name" list="employeeList" placeholder=" รหัสพนักงาน/ဝန်ထမ်းကုဒ် " />
+  <datalist id="employeeList"></datalist>
   <div style="display:flex; justify-content:space-between;">
     <button id="checkin-btn" onclick="checkIn()" disabled>Time In</button>
     <button id="checkout-btn" onclick="checkOut()" disabled>Time Out</button>
