@@ -16,6 +16,7 @@ window.onload = async function () {
         const res = await fetch(GOOGLE_SCRIPT_URL + `?action=getLocations`);
         ALLOWED_LOCATIONS = await res.json();
         initGeolocation(); // Start GPS check after loading locations
+        fetchEmployeeCodes(); // Get EmployeeCodes form Google sheet;
     } catch (err) {
         document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
         console.error("Failed to load locations.json", err);
@@ -170,4 +171,25 @@ function showLoading(show) {
   if (modal) {
     modal.style.display = show ? "flex" : "none";
   }
+}
+
+//////////////////////////////////////////////////////////////
+// 5. Get EmployeeCodes form Google sheet
+//////////////////////////////////////////////////////////////
+
+function fetchEmployeeCodes() {
+  fetch(GOOGLE_SCRIPT_URL + "?action=getEmployees")
+    .then(res => res.json())
+    .then(data => {
+      const datalist = document.getElementById("employeeList");
+      datalist.innerHTML = "";
+      data.forEach(code => {
+        const option = document.createElement("option");
+        option.value = code;
+        datalist.appendChild(option);
+      });
+    })
+    .catch(err => {
+      console.error("Failed to fetch employee codes:", err);
+    });
 }
