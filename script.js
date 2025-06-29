@@ -97,7 +97,7 @@ async function checkIn() {
     }
 
     if (!currentLocationName) {
-    alert("🚫 Not near any allowed location. You must be within 100 meters to check in.");
+    alert("🚫 บันทึกเวลาเข้างานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပဖြစ်သောကြောင့် အချိန်ဝင်ရောက်မှု မအောင်မြင်ပါ။");
     return;
     }
 
@@ -122,7 +122,7 @@ async function checkOut() {
     }
     
     if (!currentLocationName) {
-    alert("🚫 Not near any allowed location. You must be within 100 meters to check out.");
+    alert("🚫 บันทึกเวลาออกงานไม่สำเร็จ เนื่องจากคุณอยู่นอกพื้นที่ทำงาน.\n 🚫 သင်သည် အလုပ်ဧရိယာပြင်ပတွင် ရှိနေသောကြောင့် အချိန်ကုန် အသံသွင်းခြင်း မအောင်မြင်ပါ။");
     return;
     }
 
