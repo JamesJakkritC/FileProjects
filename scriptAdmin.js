@@ -46,7 +46,6 @@ function addLocation() {
         return;
     }
 
-    modal.style.display = "flex";  // Show loading modal
     
     fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
         .then(response => response.text())
