@@ -47,18 +47,27 @@ async function addLocation() {
     const locations = await response.json();
 
     const nameLower = name.toLowerCase();
-    const latFixed = parseFloat(lat.toFixed(6)); // Round to 6 decimals for comparison
-    const lngFixed = parseFloat(lng.toFixed(6));
+    const latFixed = parseFloat(lat.toFixed(8)); // Round to 6 decimals for comparison
+    const lngFixed = parseFloat(lng.toFixed(8));
 
     // 2. Check for exact duplicate (name, lat, lng)
-    const isDuplicate = locations.some(loc =>
-      (loc.name || "").toLowerCase() === nameLower &&
-      parseFloat(loc.lat).toFixed(6) === latFixed.toFixed(6) &&
-      parseFloat(loc.lng).toFixed(6) === lngFixed.toFixed(6)
+    const isDuplicateName = locations.some(loc =>
+      (loc.name || "").toLowerCase() === nameLower
     );
 
-    if (isDuplicate) {
-      alert("❌ This location (name, latitude, and longitude) already exists.");
+    if (isDuplicateName) {
+      alert("❌ This location (name) already exists.");
+      showLoading(false);
+      return;
+    }
+      
+    const isDuplicateLatLng = locations.some(loc =>
+      parseFloat(loc.lat).toFixed(8) === latFixed.toFixed(8) &&
+      parseFloat(loc.lng).toFixed(8) === lngFixed.toFixed(8)
+    );
+
+    if (isDuplicateLatLng) {
+      alert("❌ This location (latitude, and longitude) already exists.");
       showLoading(false);
       return;
     }
