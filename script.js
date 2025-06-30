@@ -15,8 +15,8 @@ window.onload = async function () {
         showLoading(true);
         const res = await fetch(GOOGLE_SCRIPT_URL + `?action=getLocations`);
         ALLOWED_LOCATIONS = await res.json();
-        initGeolocation(); // Start GPS check after loading locations
-        fetchEmployeeCodes(); // Get EmployeeCodes form Google sheet;
+        await initGeolocation(); // Start GPS check after loading locations
+        await fetchEmployeeCodes(); // Get EmployeeCodes form Google sheet;
     } catch (err) {
         document.getElementById('gps-status').innerText = " ❌ ไม่สามารถโหลดข้อมูลตำแหน่งได้. \n ❌ တည်နေရာဒေတာကို တင်၍မရပါ။ ";
         console.error("Failed to load locations.json", err);
@@ -24,7 +24,7 @@ window.onload = async function () {
     }
 };
 
-function initGeolocation() {
+async function initGeolocation() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(success, error, {
             enableHighAccuracy: true,
@@ -190,7 +190,7 @@ function showLoading(show) {
 //////////////////////////////////////////////////////////////
 let validEmployeeCodes = [];
 
-function fetchEmployeeCodes() {
+async function fetchEmployeeCodes() {
   fetch(GOOGLE_SCRIPT_URL + "?action=getEmployees")
     .then(res => res.json())
     .then(data => {
