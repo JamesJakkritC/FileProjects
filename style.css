@@ -130,3 +130,87 @@ button#checkout-btn {
   100% { transform: rotate(360deg); }
 }
 
+.form-wrapper {
+  background: #fff;
+  padding: 2rem;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.form-wrapper h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.button-group button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button-group button:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}
+
+.button-group button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+#gps-status {
+  color: #d00;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.pin {
+  margin-right: 4px;
+}
+
+#response {
+  margin-top: 12px;
+  font-weight: 500;
+}
