@@ -60,7 +60,6 @@ function addLocation() {
         })
         .finally(() => {
             showLoading(false);
-            modal.style.display = "none";  // Hide modal
             ClearData();
         });
 }
@@ -79,7 +78,7 @@ function showLoading(show) {
 // 3. Clear Data
 //////////////////////////////////////////////////////////////
 function ClearData() {
-    document.getElementById("locationName").reset();
-    document.getElementById("locationLat").reset();
-    document.getElementById("locationLng").reset();
+    document.getElementById("locationName").value = "";
+    document.getElementById("locationLat").value = "";
+    document.getElementById("locationLng").value = "";
 }
