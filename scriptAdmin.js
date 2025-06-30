@@ -26,7 +26,7 @@ function adminLogin() {
 // 2. Add Location.
 //////////////////////////////////////////////////////////////
 
-function addLocation() {
+async function addLocation() {
     const name = document.getElementById("locationName").value;
     const lat = parseFloat(document.getElementById("locationLat").value);
     const lng = parseFloat(document.getElementById("locationLng").value);
