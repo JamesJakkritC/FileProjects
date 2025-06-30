@@ -30,7 +30,6 @@ function addLocation() {
     const name = document.getElementById("locationName").value;
     const lat = parseFloat(document.getElementById("locationLat").value);
     const lng = parseFloat(document.getElementById("locationLng").value);
-    const modal = document.getElementById("loadingModal");
 
     showLoading(true);
     
@@ -52,27 +51,35 @@ function addLocation() {
         .then(data => {
             alert(data);
             showLoading(false);
+            ClearData();
         })
         .catch(err => {
             console.error(err);
             showLoading(false);
-            alert("⚠️ Failed to save location.");
+            alert("⚠️ Failed to save location. Please check the data");
         })
         .finally(() => {
             showLoading(false);
             modal.style.display = "none";  // Hide modal
-            document.getElementById("locationName").value = "";
-            document.getElementById("locationLat").value = "";
-            document.getElementById("locationLng").value = "";
+            ClearData();
         });
 }
 
 //////////////////////////////////////////////////////////////
-// 4. showLoading
+// 3. showLoading
 //////////////////////////////////////////////////////////////
 function showLoading(show) {
   const modal = document.getElementById("loadingModalAdmin");
   if (modal) {
     modal.style.display = show ? "flex" : "none";
   }
+}
+
+//////////////////////////////////////////////////////////////
+// 3. Clear Data
+//////////////////////////////////////////////////////////////
+function ClearData() {
+    document.getElementById("locationName").reset();
+    document.getElementById("locationLat").reset();
+    document.getElementById("locationLng").reset();
 }
