@@ -98,16 +98,16 @@ function deg2rad(deg) {
 // 2. Action checkIn()
 //////////////////////////////////////////////////////////////
 async function checkIn() {
-    const name = document.getElementById('name').value;
+    const employeeCode = document.getElementById('employeeCode').value;
     showLoading(true); // Show loading modal
     
-    if (!name) {
+    if (!employeeCode) {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
         showLoading(false);
         return;
     }
 
-    if (!isValidEmployeeCode(name)) {
+    if (!isValidEmployeeCode(employeeCode)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
         showLoading(false);
         return;
@@ -119,7 +119,7 @@ async function checkIn() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?employeeCode=${encodeURIComponent(employeeCode)}&action=checkin&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
@@ -139,16 +139,16 @@ async function checkIn() {
 // 3. Action checkOut()
 //////////////////////////////////////////////////////////////
 async function checkOut() {
-    const name = document.getElementById('name').value;
+    const employeeCode = document.getElementById('employeeCode').value;
     showLoading(true); // Show loading modal
     
-    if (!name) {
+    if (!employeeCode) {
         alert(' กรุณากรอกรหัสพนักงาน !!! \n ကျေးဇူးပြု၍ သင့်ဝန်ထမ်းကုဒ်ကို ထည့်ပါ။ !!! ');
         showLoading(false);
         return;
     }
 
-    if (!isValidEmployeeCode(name)) {
+    if (!isValidEmployeeCode(employeeCode)) {
         alert('❌ ไม่พบรหัสพนักงาน กรุณากรอกรหัสพนักงานใหม่.\n ❌ ဝန်ထမ်း ID မတွေ့ပါ။ ဝန်ထမ်း ID အသစ်ကို ထည့်ပါ။ ');
         showLoading(false);
         return;
@@ -160,7 +160,7 @@ async function checkOut() {
         return;
     }
 
-    const url = GOOGLE_SCRIPT_URL + `?name=${encodeURIComponent(name)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
+    const url = GOOGLE_SCRIPT_URL + `?employeeCode=${encodeURIComponent(employeeCode)}&action=checkout&location=${encodeURIComponent(currentLocationName)}`;
 
     try {
         const response = await fetch(url);
