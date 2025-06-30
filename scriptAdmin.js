@@ -33,35 +33,54 @@ function addLocation() {
 
     showLoading(true);
     
-    if (!name || !lat || !lng) {
-        alert("❗ Please fill in all fields");
+    if (!name || isNaN(lat) || isNaN(lng)) 
+    {
+        alert("❗ Please fill in all fields with valid values.");
         showLoading(false);
         return;
     }
 
-    if (isNaN(lat) || isNaN(lng)) {
-        alert('Invalid latitude or longitude');
-        showLoading(false);
-        return;
+
+  try {
+    // 1. Fetch existing locations
+    const response = await fetch(GOOGLE_SCRIPT_URL + "?action=getLocations");
+    const locations = await response.json();
+
+    const nameLower = name.toLowerCase();
+    const latFixed = parseFloat(lat.toFixed(6)); // Round to 6 decimals for comparison
+    const lngFixed = parseFloat(lng.toFixed(6));
+
+    // 2. Check for exact duplicate (name, lat, lng)
+    const isDuplicate = locations.some(loc =>
+      (loc.name || "").toLowerCase() === nameLower &&
+      parseFloat(loc.lat).toFixed(6) === latFixed.toFixed(6) &&
+      parseFloat(loc.lng).toFixed(6) === lngFixed.toFixed(6)
+    );
+
+    if (isDuplicate) {
+      alert("❌ This location (name, latitude, and longitude) already exists.");
+      showLoading(false);
+      return;
     }
 
-    
-    fetch(GOOGLE_SCRIPT_URL + `?action=addLocation&name=${name}&lat=${lat}&lng=${lng}`)
-        .then(response => response.text())
-        .then(data => {
-            alert(data);
-            showLoading(false);
-            ClearData();
-        })
-        .catch(err => {
-            console.error(err);
-            showLoading(false);
-            alert("⚠️ Failed to save location. Please check the data");
-        })
-        .finally(() => {
-            showLoading(false);
-            ClearData();
-        });
+    // 3. Proceed to add
+    const saveResponse = await fetch(
+      `${GOOGLE_SCRIPT_URL}?action=addLocation&name=${encodeURIComponent(name)}&lat=${lat}&lng=${lng}`
+    );
+    const resultText = await saveResponse.text();
+
+    alert(resultText);
+
+    // 4. Clear input fields
+    ClearData();
+
+  } catch (err) {
+    console.error("Error saving location:", err);
+    showLoading(false);
+    alert("⚠️ Failed to save location.");
+  }
+
+  showLoading(false);
 }
 
 //////////////////////////////////////////////////////////////
