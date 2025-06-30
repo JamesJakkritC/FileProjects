@@ -13,16 +13,21 @@
   <a class="admin-link" href="admin.html">🔒 Admin</a>
 </header>
 
-<div class="container">
+<div class="form-wrapper">
   <h2>Employee Check-In</h2>
-  <input type="text" id="name" list="employeeList" placeholder=" รหัสพนักงาน/ဝန်ထမ်းကုဒ် " />
-  <datalist id="employeeList"></datalist>
-  <div style="display:flex; justify-content:space-between;">
+
+  <div class="input-group">
+    <label for="name">Employee Code</label>
+    <input type="text" id="name" placeholder="รหัสพนักงาน / ဝန်ထမ်းကုဒ်" />
+  </div>
+
+  <div class="button-group">
     <button id="checkin-btn" onclick="checkIn()" disabled>Time In</button>
     <button id="checkout-btn" onclick="checkOut()" disabled>Time Out</button>
   </div>
-  <p id="gps-status">📍 Locating...</p>
-  <p id="response"></p>
+
+  <p id="gps-status"><span class="pin">📍</span> Locating...</p>
+  <div class="message" id="response"></div>
 </div>
 
 <div id="loadingModal" class="modal" style="display: none;">
