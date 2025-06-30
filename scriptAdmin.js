@@ -43,7 +43,7 @@ async function addLocation() {
 
   try {
     // 1. Fetch existing locations
-    const response = await fetch(GOOGLE_SCRIPT_URL + "?action=getLocations");
+    const response = await fetch(GOOGLE_SCRIPT_URL + `?action=getLocations`);
     const locations = await response.json();
 
     const nameLower = name.toLowerCase();
